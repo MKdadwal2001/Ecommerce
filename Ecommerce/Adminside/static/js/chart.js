@@ -62,19 +62,16 @@ $(function() {
   };
   var options = {
     scales: {
-      y: {
+      yAxes: [{
         ticks: {
           beginAtZero: true
         }
-      }
+      }]
     },
     legend: {
       display: false
     },
     elements: {
-      line:{
-        tension: 0.5
-      },
       point: {
         radius: 0
       }
@@ -143,11 +140,6 @@ $(function() {
   };
 
   var areaOptions = {
-    elements: {
-      line: {
-        tension: 0.5
-      }
-    },
     plugins: {
       filler: {
         propagate: true
@@ -191,24 +183,21 @@ $(function() {
       }
     },
     elements: {
-      line:{
-        tension:0.5
-      },
       point: {
         radius: 0
       }
     },
     scales: {
-      x: {
+      xAxes: [{
         gridLines: {
           display: false
         }
-      },
-      y: {
+      }],
+      yAxes: [{
         gridLines: {
           display: false
         }
-      }
+      }]
     }
   }
 
@@ -272,10 +261,10 @@ $(function() {
 
   var scatterChartOptions = {
     scales: {
-      x: {
+      xAxes: [{
         type: 'linear',
         position: 'bottom'
-      }
+      }]
     }
   }
   // Get context with jQuery - using jQuery's .get() method.
