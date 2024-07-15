@@ -24,7 +24,12 @@
                 {% for i in all_products %}
                 <tr>
                   <td>{{forloop.counter}}</td>
+                  <td>{{i.category_name}}</td>
                   <td>{{i.product_name}}</td>
+                  <td>{{i.product_description}}</td>
+                  <td>{{i.product_price}}</td>
+                  <td><img src="{{i.product_image.url}}" alt="{{i.product_image}}" width="100px" height="100px"></td>
+    
                   <td>
                     <a href="{% url 'delete-product' i.id %}">
                       <button type="button" class="btn btn-danger">Delete</button>
@@ -36,6 +41,7 @@
                     </a>
                   </td>
                 </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

@@ -47,10 +47,10 @@ def add_product(request):
         product_name = request.POST["productname"]
         product_description = request.POST["productdescription"]
         product_price= request.POST["productprice"]
-        product_image = request.POST["productimage"]
+        product_image = request.FILES["productimage"]
         
         p = Product()
-        p.category_id = Category.objects.get(id=categoryId)
+        p.category_id = Category.objects.get(id=category_Id)
         p.product_name = product_name
         p.product_description = product_description
         p.product_price = product_price
