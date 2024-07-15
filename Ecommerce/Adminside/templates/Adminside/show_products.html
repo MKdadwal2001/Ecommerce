@@ -24,7 +24,7 @@
                 {% for i in all_products %}
                 <tr>
                   <td>{{forloop.counter}}</td>
-                  <td>{{i.category_name}}</td>
+                  <td>{{i.category_id.category_name}}</td>
                   <td>{{i.product_name}}</td>
                   <td>{{i.product_description}}</td>
                   <td>{{i.product_price}}</td>
