@@ -15,7 +15,10 @@
                 </a>
                 <h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
             </div>
-        </div>
+            {% for i in limited_categories  %}
+            <a href="" class="nav-item nav-link">{{i.product_name}}</a>
+            {% endfor %}
+            </div>
         </div>
 </div>
 

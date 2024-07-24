@@ -6,7 +6,7 @@ from Adminside.models import *
 def user_register(request):
     categories_data = Category.objects.all()
     limited_categories = Category.objects.all()[:8]
-    return render(request,"Userside/user_er.htmregistl",{"categories_data":categories_data})
+    return render(request,"Userside/user_register.html",{"categories_data":categories_data})
 
 def user_login(request):
     categories_data = Category.objects.all()
@@ -14,7 +14,10 @@ def user_login(request):
     return render(request,"Userside/user_login.html",{"categories_data":categories_data})
 
 def index(request):
-    return render(request,"Userside/index.html")
+    categories_data = Category.objects.all()
+    limited_categories = Category.objects.all()[:8]
+    return render(request,"Userside/index.html",{"categories_data":categories_data})
+
 
 def user_dashboard(request):
     categories_data = Category.objects.all()
