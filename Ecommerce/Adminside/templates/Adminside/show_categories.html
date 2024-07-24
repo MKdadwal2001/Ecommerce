@@ -12,8 +12,9 @@
                 <tr>
                   <th>S.No.</th>
                   <th>Category Name</th>
+                  <th>Category Image</th>
                   <th>Delete</th>
-                  <th>Action</th>
+                  <th>update</th>
                 </tr>
               </thead>
               <tbody>
@@ -21,6 +22,8 @@
                 <tr>
                   <td>{{forloop.counter}}</td>
                   <td>{{i.category_name}}</td>
+                  <td><img src="{{i.category_image.url}}" alt="{{i.category_image}}" width="200px" height="200px"></td>
+    
                   <td>
                     <a href="{% url 'delete-category' i.id %}">
                       <button type="button" class="btn btn-danger">Delete</button>

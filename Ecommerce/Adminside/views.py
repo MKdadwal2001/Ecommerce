@@ -10,9 +10,11 @@ def index(request):
 def add_category(request):
     if request.method=="POST":
         category_name = request.POST["categoryname"]
+        category_image = request.FILES["categoryimage"]
 
         c = Category()
         c.category_name = category_name
+        c.category_image = category_image
         c.save()
 
         return redirect(show_categories)
@@ -32,8 +34,10 @@ def update_category(request,pk):
     selected_category = Category.objects.get(id=pk)
     if request.method=="POST":
         category_name = request.POST["categoryname"]
+        category_image = request.POST["categoryimage"]
 
         selected_category.category_name = category_name
+        selected_category.category_image = category_image
         selected_category.save()
 
         return redirect(show_categories)
