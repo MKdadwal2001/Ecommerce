@@ -3,6 +3,17 @@ from django.http import HttpResponse
 from .models import *
 
 # Create your views here.
+def register(request):
+    categories_data = Category.objects.all()
+    limited_categories = Category.objects.all()[:8]
+    return render(request,"Adminside/register.html",{"categories_data":categories_data})
+
+def login(request):
+    categories_data = Category.objects.all()
+    limited_categories = Category.objects.all()[:8]
+    return render(request,"Adminside/login.html",{"categories_data":categories_data})
+
+
 def index(request):
     return render(request,"Adminside/index.html")
 

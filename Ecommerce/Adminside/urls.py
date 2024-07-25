@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("login",views.login,name="login"),
+    path("register",views.register,name="register"),
+
     path("index",views.index,name="index"),
 
     path("add-category",views.add_category,name="add-category"),
