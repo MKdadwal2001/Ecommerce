@@ -14,6 +14,6 @@ class Product(models.Model):
     product_description = models.CharField(max_length=255 ,default="")
     product_price = models.CharField(max_length=255, default="")
     product_image = models.ImageField(upload_to="products", default="")
-
+    is_teends_or_just_arived = models.BooleanField( default=True ) 
     def __str__(self):
         return self.product_name

@@ -52,13 +52,15 @@ def add_product(request):
         product_description = request.POST["productdescription"]
         product_price= request.POST["productprice"]
         product_image = request.FILES["productimage"]
-        
+        isTrendingOrJustArrived = request.POST["membershipRadios"]
+
         p = Product()
         p.category_id = Category.objects.get(id=category_Id)
         p.product_name = product_name
         p.product_description = product_description
         p.product_price = product_price
         p.product_image = product_image
+        p.is_teends_or_just_arived = isTrendingOrJustArrived
         p.save()
 
         return redirect(show_products)
@@ -77,24 +79,25 @@ def delete_product(request,pk):
     return redirect(show_categories)
 
 def update_product(request,pk):
+    all_categories = Category.objects.all()
     selected_product = Product.objects.get(id=pk)
     if request.method=="POST":
         product_name = request.POST["productname"]
         product_description = request.POST["productdescription"]
         product_price = request.POST["productprice"]
-        product_image = request.POST["productimage"]
-
-
+        product_image = request.FILES["productimage"]
+        isTrendingOrJustArrived = request.POST["membershipRadios"]
 
         selected_product.product_name = product_name
         selected_product.product_description = product_description
         selected_product.product_price = product_price
         selected_product.product_image = product_image
+        selected_product.is_teends_or_just_arived = isTrendingOrJustArrived
         
         selected_product.save()
 
         return redirect(show_products)
     else:
-        return render(request,"Adminside/update_product.html",{"selected_product":selected_product})
+        return render(request,"Adminside/update_product.html",{"selected_product":selected_product,"all_categories":all_categories})
 
 

@@ -9,31 +9,58 @@
       <p class="card-description">
         Fill all the details below
       </p>
-      <form class="forms-sample" method="post" action="{% url 'update-product' pk=selected_product.id %}">
+      <form class="forms-sample" method="post" action="{% url 'update-product' pk=selected_product.id %}" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="form-group">
+          <label for="productname">Select Category</label>
+          <select class="form-control" name="categoryId" id="category">
+            {% for i in all_categories %}
+            <option value="{{i.id}}">{{i.category_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
         <div class="form-group">
           <label for="exampleInputUsername1">Product Name</label>
           <input type="text" class="form-control" name="productname" value="{{selected_product.product_name}}" id="exampleInputUsername1" placeholder="Product Name">
         </div>
         <div class="form-group">
           <label for="exampleInputUsername1">Product Description</label>
-          <input type="text" class="form-control" name="productdescription" value="{{selected_product.product_name}}" id="exampleInputUsername1" placeholder="Product Description">
+          <input type="text" class="form-control" name="productdescription" value="{{selected_product.product_description}}" id="exampleInputUsername1" placeholder="Product Description">
         </div>
         <div class="form-group">
           <label for="exampleInputUsername1">Product Price</label>
-          <input type="text" class="form-control" name="productprice" value="{{selected_product.product_name}}" id="exampleInputUsername1" placeholder="Product Price">
+          <input type="text" class="form-control" name="productprice" value="{{selected_product.product_price}}" id="exampleInputUsername1" placeholder="Product Price">
         </div>
         <div class="form-group"> 
           <label for="exampleInputPassword1">Previous Product Image</label>
           <br>
           <img src="{{selected_product.product_image.url}}" width="100px" height="100px">
       </div>
-      
         <div class="form-group">
           <label for="exampleInputUsername1">Product Image</label>
-          <input type="file" class="form-control" name="productimage" value="{{selected_product.product_name}}" id="exampleInputUsername1" placeholder="Product Image">
+          <input type="file" class="form-control" name="productimage" id="exampleInputUsername1" placeholder="Product Image">
         </div>
-        
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-8 col-form-label">Select Product is in Trending or Just Arrived</label>
+            <div class="col-sm-5">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="True" checked="">
+                  Trending
+                <i class="input-helper"></i></label>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="False">
+                  Just Arrived
+                <i class="input-helper"></i></label>
+              </div>
+            </div>
+          </div>
+        </div>
         <button type="submit" class="btn btn-primary me-2">Update</button>
       </form>
     </div>
