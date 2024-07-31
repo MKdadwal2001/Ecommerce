@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=255)
@@ -17,3 +17,13 @@ class Product(models.Model):
     is_teends_or_just_arived = models.BooleanField( default=True ) 
     def __str__(self):
         return self.product_name
+
+class CustomUser(models.Model):
+    phone_number = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    user_image = models.ImageField(upload_to="User")
+    pincode = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    land_mark = models.CharField(max_length=255)
+    def __str__(self): 
+        return self.pincode
