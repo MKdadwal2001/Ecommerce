@@ -1,21 +1,59 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
-    categories_data = Category.objects.all()
-    limited_categories = Category.objects.all()[:8]
-    return render(request,"Adminside/register.html",{"categories_data":categories_data})
+    if request.method=="POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        email = request.POST["email"]
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+
+        new_user = User.objects.create_user(username=username,email=email,password=password)
+        new_user.first_name = firstname
+        new_user.last_name = lastname
+        new_user.save()
+
+        messages.success(request,"New user register successfully.")
+        return redirect(login)
+    else:
+        return render(request,"AdminSide/register.html")
+
+@login_required(login_url="login")
+def logout(request):
+    logout(request)
+    messages.success(request,"Logout Successfully.")
+    return redirect(login)
+ 
 
 def login(request):
-    categories_data = Category.objects.all()
-    limited_categories = Category.objects.all()[:8]
-    return render(request,"Adminside/login.html",{"categories_data":categories_data})
+    if request.method == "POST":
+        userName = request.POST["username"]
+        passWord = request.POST["password"]
+        
+        user = authenticate(username=userName,password=passWord)
+        if user is not None:
+            login(request,user)
+
+            messages.success(request,"Login Successfully.")
+            return redirect(index_page)
+        else:
+            messages.warning(request,"Wrong username or password.")
+            return redirect(login)
+    else:
+        return render(request,"AdminSide/login.html")
+
 
 
 def index(request):
     return render(request,"Adminside/index.html")
+
+
+
 
 
 def add_category(request):
