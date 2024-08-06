@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def register(request):
@@ -19,18 +20,18 @@ def register(request):
         new_user.save()
 
         messages.success(request,"New user register successfully.")
-        return redirect(login)
+        return redirect(admin_login)
     else:
         return render(request,"AdminSide/register.html")
 
 @login_required(login_url="login")
-def logout(request):
+def admin_logout(request):
     logout(request)
     messages.success(request,"Logout Successfully.")
-    return redirect(login)
+    return redirect(admin_login)
  
 
-def login(request):
+def admin_login(request):
     if request.method == "POST":
         userName = request.POST["username"]
         passWord = request.POST["password"]
@@ -38,29 +39,25 @@ def login(request):
         user = authenticate(username=userName,password=passWord)
         if user is not None:
             login(request,user)
-
             messages.success(request,"Login Successfully.")
-            return redirect(index_page)
+            return redirect(admin_index)
         else:
             messages.warning(request,"Wrong username or password.")
-            return redirect(login)
+            return redirect(admin_login)
     else:
         return render(request,"AdminSide/login.html")
 
-
-
-def index(request):
+def admin_index(request):
     return render(request,"Adminside/index.html")
-
-
-
-
 
 def add_category(request):
     if request.method=="POST":
+        if request.POST.get('num')=="":
+            return render(request,"add_category.html",{'error':True})
+
         category_name = request.POST["categoryname"]
         category_image = request.FILES["categoryimage"]
-
+        
         c = Category()
         c.category_name = category_name
         c.category_image = category_image

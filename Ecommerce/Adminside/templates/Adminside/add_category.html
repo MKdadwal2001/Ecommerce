@@ -1,30 +1,34 @@
 {% extends "AdminSide/index.html" %}
 {% block content %}
 <div class="content-wrapper">
-  <div class="row">
-<div class="col-md-12 grid-margin stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Add Category</h4>
-      <p class="card-description">
-        Fill all the details below
-      </p>
-      <form class="forms-sample" method="post" action="{% url 'add-category' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputUsername1">Category Name</label>
-          <input type="text" class="form-control" name="categoryname" id="exampleInputUsername1" placeholder="Category Name">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Category</h4>
+                    <p class="card-description">
+                        Fill all the details below
+                    </p>
+                    <form class="forms-sample" method="post" action="{% url 'add-category' %}" enctype="multipart/form-data">
+                    
+
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Category Name</label>
+                            <input type="text" class="form-control" name="categoryname" id="exampleInputUsername1" placeholder="Category Name" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Category Image</label>
+                            <input type="file" class="form-control" name="categoryimage" id="exampleInputUsername1" placeholder="Category Image" required="">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="exampleInputUsername1">Category Image</label>
-          <input type="file" class="form-control" name="categoryimage" id="exampleInputUsername1" placeholder="Category Image">
-        </div>
-       
-        <button type="submit" class="btn btn-primary me-2">Submit</button>
-      </form>
     </div>
-  </div>
-</div>
-</div>
 </div>
 {% endblock %}
+</div>
+</div>
