@@ -47,7 +47,7 @@ def user_login(request):
         categories_data = Category.objects.all()[:6]
         trendy_products = Product.objects.filter(is_teends_or_just_arived=True)[:8]
         just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)[:8]
-
+        return HttpResponse(user_login)
     else:
         return render(request,"Userside/user_login.html")
     
