@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 def user_register(request):
     if request.method == "POST":
         username = request.POST.get('username', None)
-        password = request.POST.get('passwd')
+        password = request.POST.get('password')
         email = request.POST.get('email')
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
@@ -27,8 +27,7 @@ def user_register(request):
         n_user.first_name = firstname
         n_user.last_name = lastname
         n_user.save()
-        print("Created user id:- ", User.objects.get(id=n_user.id))
-        
+        print("Created user id:-",User.objects.get(id=n_user.id))
         
         c_user = CustomUser()
         c_user.phone_number = phonenumber
