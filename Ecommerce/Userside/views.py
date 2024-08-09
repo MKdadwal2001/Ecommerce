@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from Adminside.models import *
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 
 
 # Create your views here.
@@ -29,15 +31,16 @@ def user_register(request):
         n_user.save()
         print("Created user id:-",User.objects.get(id=n_user.id))
         
-        c_user = CustomUser()
+        
+        c_user = UserProfile()
+        c_user.userId = User.objects.get(id=n_user.id)
+        c_user.user_image = user_image
         c_user.phone_number = phonenumber
         c_user.address = address
-        c_user.user_image = user_image
         c_user.pincode = pincode
         c_user.locality = locality
-        c_user.landmark = landmark
-        c_user.user_id = User.objects.get(id=n_user.id)
         c_user.save()
+        
         return redirect(user_login)
     else:
         return render(request,"Userside/user_register.html")
@@ -46,14 +49,18 @@ def user_login(request):
     if request.method == "POST":
         userName = request.POST["username"]
         passWord = request.POST["password"]
-
-        categories_data = Category.objects.all()[:6]
-        trendy_products = Product.objects.filter(is_teends_or_just_arived=True)[:8]
-        just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)[:8]
-        return HttpResponse(user_login)
+        
+        user = authenticate(username=userName,password=passWord)
+        if user is not None:
+            login(request,user)
+            messages.success(request,"Login Successfully.")
+            return redirect(user_dashboard)
+        else:
+            messages.warning(request,"Wrong username or password.")
+            return redirect(user_login)
     else:
         return render(request,"Userside/user_login.html")
-    
+
 def index(request):
     categories_data = Category.objects.all()[:6]
     trendy_products = Product.objects.filter(is_teends_or_just_arived=True)[:8]

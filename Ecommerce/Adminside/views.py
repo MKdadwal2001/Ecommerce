@@ -76,19 +76,21 @@ def delete_category(request,pk):
     selected_category.delete()
     return redirect(show_categories)
 
-def update_category(request,pk):
+def update_category(request, pk):
     selected_category = Category.objects.get(id=pk)
-    if request.method=="POST":
+    if request.method == "POST":
         category_name = request.POST["categoryname"]
-        category_image = request.POST["categoryimage"]
+
+        if 'categoryimage' in request.FILES:
+            category_image = request.FILES["categoryimage"]
+            selected_category.category_image = category_image
 
         selected_category.category_name = category_name
-        selected_category.category_image = category_image
         selected_category.save()
 
         return redirect(show_categories)
     else:
-        return render(request,"Adminside/update_category.html",{"selected_category":selected_category})
+        return render(request, "Adminside/update_category.html", {"selected_category": selected_category})
 
 def add_product(request):
     if request.method=="POST":

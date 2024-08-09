@@ -21,16 +21,15 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
-
-class CustomUser(models.Model):
-    phone_number = models.CharField(max_length=255)
+class UserProfile(models.Model):
+    userId = models.OneToOneField(User,on_delete=models.CASCADE, default="")
+    user_image = models.ImageField(upload_to="profile")
+    phone_number = models.CharField(max_length=100, default="")
     address = models.CharField(max_length=255)
-    user_image = models.ImageField(upload_to="User")
-    pincode = models.CharField(max_length=255)
-    locality = models.CharField(max_length=255)
-    landmark = models.CharField(max_length=255)
-    user_id = models.OneToOneField(User,on_delete=models.PROTECT,default="")
-
+    pincode = models.CharField(max_length=40)
+    locality = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.user_id.username
+        return self.userId.username
+
+

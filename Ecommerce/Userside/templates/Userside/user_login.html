@@ -8,6 +8,13 @@
         <div class="col-lg-7 mb-5">
             <div class="contact-form">
                 <div id="success"></div>
+                {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
                 <form action="{% url 'user-login' %}" method="post">
                     {% csrf_token %}
                     
