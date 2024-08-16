@@ -65,13 +65,13 @@ def user_login(request):
 
 
 def index(request):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     trendy_products = Product.objects.filter(is_teends_or_just_arived=True)[:8]
     just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)[:8]
     return render(request,"Userside/index.html",{"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products})
   
 def user_dashboard(request):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     trendy_products = Product.objects.filter(is_teends_or_just_arived=True)[:8]
     just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)[:8]
     return render(request,"Userside/dashboard.html",{"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products})  
@@ -82,23 +82,23 @@ def user_logout(request):
     return redirect(user_dashboard)
 
 def category_based_products(request,pk):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     filtered_products_according_category = Product.objects.filter(category_id = Category.objects.get(id=pk))
     print("Filtered products according to the category :- ", filtered_products_according_category)
     return render(request,"Userside/category_based_products.html",{"categories_data":categories_data,"filtered_products_according_category":filtered_products_according_category})
 
 def view_all_products(request):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     all_products = Product.objects.all()
     return render(request,"Userside/view_all_products.html",{"categories_data":categories_data,"all_products":all_products,})
 
 def all_categories(request):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     all_categories = Category.objects.all()
     return render(request,"Userside/all_categories.html",{"categories_data":categories_data,"all_categories":all_categories})
 
 def product_details(request,pk):
-    categories_data = Category.objects.all()[:15]
+    categories_data = Category.objects.all()[:12]
     product_details = Product.objects.get(id=pk)
     print("Product Details :- ", product_details)
     return render(request,"Userside/product_details.html",{"categories_data":categories_data,"product_details":product_details})
