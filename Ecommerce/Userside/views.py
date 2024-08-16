@@ -90,13 +90,16 @@ def category_based_products(request,pk):
 def view_all_products(request):
     categories_data = Category.objects.all()[:6]
     all_products = Product.objects.all()
-    return render(request,"Userside/view_all_products.html",{
-        "categories_data":categories_data,
-        "all_products":all_products
-    })
+    return render(request,"Userside/view_all_products.html",{"categories_data":categories_data,"all_products":all_products,})
 
 def all_categories(request):
     categories_data = Category.objects.all()[:6]
     all_categories = Category.objects.all()
     return render(request,"Userside/all_categories.html",{"categories_data":categories_data,"all_categories":all_categories})
 
+def product_details(request,pk):
+    categories_data = Category.objects.all()[:10]
+    product_details = Product.objects.get(id=pk)
+    print("Product Details :- ", product_details)
+    return render(request,"Userside/product_details.html",{"categories_data":categories_data,"product_details":product_details})
+    

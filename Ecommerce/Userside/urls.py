@@ -11,5 +11,5 @@ urlpatterns = [
     path("category-based-products/<int:pk>",views.category_based_products,name="category-based-products"),
     path("all-products",views.view_all_products,name="all-products"),
     path("all-categories",views.all_categories,name="all-categories"),
-
+    path("product-details/<int:pk>",views.product_details,name="product-details")
 ]
