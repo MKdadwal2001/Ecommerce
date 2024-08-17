@@ -32,4 +32,5 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.userId.username
 
-
+class FavouriteProducts(models.Model):
+    product_id = models.ForeignKey(Product,on_delete=models.CASCADE)

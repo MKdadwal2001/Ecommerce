@@ -62,6 +62,9 @@
                 </div>
                 <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
             </div>
+            <a href="{% url 'add-to-favourite' product_details.id %}">
+                <button class="btn btn-primary px-3"><i class="fas fa-heart"></i> Add To Favourite</button>
+            </a>
         </div>
     </div>
     <div class="row px-xl-5">
