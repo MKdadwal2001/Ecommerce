@@ -13,4 +13,5 @@ urlpatterns = [
     path("all-categories",views.all_categories,name="all-categories"),
     path("product-details/<int:pk>",views.product_details,name="product-details"),
     path("add-to-favourite/<int:pk>",views.add_to_favourite,name="add-to-favourite"),
+    path("all-favourite-products",views.all_favourite_products,name="all-favourite-products"),
 ]
