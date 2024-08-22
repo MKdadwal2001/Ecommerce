@@ -122,3 +122,8 @@ def all_favourite_products(request):
     filtered_all_favourite_products = FavouriteProducts.objects.all()
     total_favourite_products = FavouriteProducts.objects.all().count()
     return render(request,"Userside/all_favourite_products.html",{"categories_data":categories_data,"filtered_all_favourite_products":filtered_all_favourite_products,"total_favourite_products":total_favourite_products})
+
+def remove_from_favourite(request,pk):
+    selected_product =  FavouriteProducts.objects.get(id=pk)
+    selected_product.delete()
+    return redirect(all_favourite_products)
