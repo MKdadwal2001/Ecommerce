@@ -100,7 +100,8 @@ def all_categories(request):
     categories_data = Category.objects.all()[:15]
     all_categories = Category.objects.all()
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/all_categories.html",{"categories_data":categories_data,"all_categories":all_categories,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/all_categories.html",{"categories_data":categories_data,"all_categories":all_categories,
+    "total_favourite_products":total_favourite_products})
 
 def product_details(request,pk):
     categories_data = Category.objects.all()[:15]
@@ -127,3 +128,38 @@ def remove_from_favourite(request,pk):
     selected_product =  FavouriteProducts.objects.get(id=pk)
     selected_product.delete()
     return redirect(all_favourite_products)
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        print(f"username = {username}")
+        print(f"email = {email}")
+        print(f"subject = {subject}")
+        print(f"message = {message}")
+
+        cu_user = ContactUs()
+        cu_user.username= username
+        cu_user.email = email
+        cu_user.subject = subject
+        cu_user.message = message
+        cu_user.save()
+        messages.success(request, "Your Query is Submitted successfully.")
+        categories_data = Category.objects.all()[:10]
+        total_favourite_products = FavouriteProducts.objects.all().count()
+        return render(request, 'Userside/contact_us.html',{"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+    else:
+        categories_data = Category.objects.all()[:10]
+        total_favourite_products = FavouriteProducts.objects.all().count()
+        return render(request, "Userside/contact_us.html",{"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+
+def about_us(request):
+    categories_data = Category.objects.all()[:10]
+    total_favourite_products = FavouriteProducts.objects.all().count()
+    return render(request,"Userside/about_us.html",{"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+
+

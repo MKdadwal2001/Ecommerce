@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+
 # Create your views here.
 def register(request):
     if request.method=="POST":
@@ -148,4 +149,11 @@ def update_product(request,pk):
     else:
         return render(request,"Adminside/update_product.html",{"selected_product":selected_product,"all_categories":all_categories})
 
+def customer_queries(request):
+    customer_queries = ContactUs.objects.all()
+    return render(request,"Adminside/customer_queries.html",{"customer_queries":customer_queries})
 
+def admin_reply(request):
+    pass
+
+    

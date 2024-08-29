@@ -122,7 +122,8 @@
                               <a href="checkout.html" class="dropdown-item">Orders</a>
                            </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                        <a href="{% url 'contact-us' %}" class="nav-item nav-link">Contact Us</a>
+                        <a href="{% url 'about-us' %}" class="nav-item nav-link">About Us</a>
                      </div>
                      <div class="navbar-nav ml-auto py-0">
                         <a href="#" class="nav-item nav-link">Welcome {{request.user}}</a>
@@ -133,7 +134,8 @@
                         <a href="{% url 'user-dashboard' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'all-products' %}" class="nav-item nav-link">Products</a>
                         <a href="{% url 'all-categories' %}" class="nav-item nav-link">Categories</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'contact-us' %}" class="nav-item nav-link">Contact Us</a>
+                        <a href="{% url 'about-us' %}" class="nav-item nav-link">About Us</a>
                      </div>
                      <div class="navbar-nav ml-auto py-0">
                         <a href="{% url 'user-login' %}" class="nav-item nav-link">Login</a>
@@ -279,13 +281,15 @@
                         <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Categories</a>
                         <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Orders</a>
-                        <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        <a class="text-dark mb-2" href="{% url 'contact-us' %}"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        <a class="text-dark mb-2" href="about-us.html"><i class="fa fa-angle-right mr-2"></i>About Us</a>
                         <a class="text-dark" href="{% url 'user-logout' %}"><i class="fa fa-angle-right mr-2"></i>Logout</a>
                         {% else %}
                         <a class="text-dark mb-2" href="{% url 'user-dashboard' %}"><i class="fa fa-angle-right mr-2"></i>Home</a>
                         <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Products</a>
                         <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Categories</a>
-                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        <a class="text-dark mb-2" href="{% url 'contact-us' %}"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        <a class="text-dark mb-2" href="{% url 'about-us' %}"><i class="fa fa-angle-right mr-2"></i>About Us</a>
                         <a class="text-dark mb-2" href="{% url 'user-login' %}"><i class="fa fa-angle-right mr-2"></i>Login</a>
                         <a class="text-dark mb-2" href="{% url 'user-register' %}"><i class="fa fa-angle-right mr-2"></i>Register</a>
                         {% endif %}
