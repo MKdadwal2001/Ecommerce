@@ -16,6 +16,7 @@
                   <th>Subject</th>
                   <th>Message</th>
                   <th>Reply</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,10 +27,15 @@
                   <td>{{i.email}}</td>
                   <td>{{i.subject}}</td>
                   <td>{{i.message}}</td>
+                  <td>{{i.reply}}</td>
                   <td>
-                    <a href="{% url 'admin-reply' %}">
-                      <button type="button" class="btn btn-danger">Reply</button>
-                    </a>
+                    {% if not i.reply %}
+                      <a href="{% url 'admin-reply-customer-queries' pk=i.id %}">
+                        <button type="button" class="btn btn-danger">Reply</button>
+                      </a>
+                    {% else %}
+                      <span>Already Replied</span>
+                    {% endif %}
                   </td>
                 </tr>
                 {% endfor %}

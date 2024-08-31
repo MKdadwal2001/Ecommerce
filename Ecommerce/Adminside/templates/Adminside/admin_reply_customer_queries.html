@@ -1,0 +1,38 @@
+{% extends "AdminSide/index.html" %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="row">
+<div class="col-md-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Admin Reply To Customer Queries.</h4>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="col-lg-12 mb-3" id="success"  style="color:white; background-color: #4CAF50; height: 40px; width: 800px; border-radius: 2px;">
+          <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="position: absolute; top: 20%;">{{ message }}</p>
+      </div>
+      {% endfor %}
+      {% endif %}
+      <form action="{% url 'admin-reply-customer-queries' pk=selected_query.id %}" method="POST">
+         {% csrf_token %}
+         <div class="control-group">
+            <input type="text" class="form-control" name ="subject" value="{{selected_query.subject}}" placeholder="Subject" readonly>
+            <p class="help-block text-danger"></p>
+         </div>
+         <div class="control-group">
+            <textarea class="form-control" rows="5" name="message" placeholder="Customer Message" readonly>{{selected_query.message}}</textarea>
+            <p class="help-block text-danger"></p>
+        </div>
+         <div class="control-group">
+            <textarea class="form-control" rows="5" name ="reply" placeholder="Message Reply"></textarea>
+            <p class="help-block text-danger"></p>
+         </div>
+          <button class="btn btn-primary py-2 px-4" type="submit">Send</button>
+         </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

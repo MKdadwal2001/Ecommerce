@@ -40,6 +40,8 @@ class ContactUs(models.Model):
     email = models.EmailField(max_length=255)
     subject = models.CharField(max_length=255)
     message = models.CharField(max_length=255)
+    reply =  models.CharField(max_length=255, default="")
+    is_replied = models.BooleanField(default="False")
 
     def __str__(self):
         return self.username

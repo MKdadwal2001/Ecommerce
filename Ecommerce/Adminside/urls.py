@@ -17,6 +17,5 @@ urlpatterns = [
     path("delete-product/<int:pk>",views.delete_product,name="delete-product"),
     path("update-product/<int:pk>",views.update_product,name="update-product"),
     path("customer-queries",views.customer_queries,name="customer-queries"),
-    path("admin-reply",views.admin_reply,name="admin-reply"),
-
+    path("admin-reply-customer-queries/<int:pk>",views.admin_reply_customer_queries,name="admin-reply-customer-queries"),
 ]

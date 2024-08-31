@@ -4,6 +4,9 @@ from .models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 # Create your views here.
@@ -153,7 +156,27 @@ def customer_queries(request):
     customer_queries = ContactUs.objects.all()
     return render(request,"Adminside/customer_queries.html",{"customer_queries":customer_queries})
 
-def admin_reply(request):
-    pass
 
+def admin_reply_customer_queries(request,pk):
+    selected_query = ContactUs.objects.get(id=pk)
+    print("selected query:-", selected_query)
+    if request.method == "POST":
+        subject = selected_query.subject
+        message = selected_query.message
+        reply = request.POST.get("reply")
+
+        email_from = settings.EMAIL_HOST_USER
+        recipint_list = [selected_query.email, ]
+
+        txt = "Message:- {m} \n Reply:- {r}".format(m=message,r=reply)
+        send_mail( subject,txt, email_from, recipint_list )
     
+        selected_query.reply = reply
+        selected_query.is_replied = True
+        selected_query.save()
+
+        print("subject:-",subject, "message :-", message, "reply:-", reply) 
+        messages.success(request,"Customer Queries Replied Successfully.")
+        return redirect(customer_queries)
+    else:
+        return render(request,"Adminside/admin_reply_customer_queries.html",{"selected_query":selected_query})    
