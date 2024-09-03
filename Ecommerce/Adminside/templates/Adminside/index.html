@@ -101,6 +101,19 @@
                   </div>
                </li>
                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+                  <i class="ti-palette menu-icon"></i>
+                  <span class="menu-title">Offers</span>
+                  <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="ui-basic4">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'add-offer' %}">Add Offers</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'show-offer' %}">Show offers</a></li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
                 <i class="ti-palette menu-icon"></i>
                 <span class="menu-title">Contact Us</span>

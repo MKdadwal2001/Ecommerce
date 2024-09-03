@@ -50,3 +50,8 @@ class AddBanner(models.Model):
     banner_image = models.ImageField(upload_to="banner", default="")
     is_show = models.BooleanField(default="False")
     
+class AddOffers(models.Model):
+    offer_image = models.ImageField(upload_to="offer", default="")
+    offer_description = models.CharField(max_length=225)
+    offer_title = models.CharField(max_length=225)
+    is_showing = models.BooleanField(default="False")

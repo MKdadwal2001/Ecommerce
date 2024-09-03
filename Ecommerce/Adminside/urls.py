@@ -23,5 +23,9 @@ urlpatterns = [
     path("show-banner",views.show_banner,name="show-banner"),
     path("update-banner/<int:pk>",views.update_banner,name="update-banner"),
     path("delete-banner/<int:pk>",views.delete_banner,name="delete-banner"),
-
+   
+    path("add-offer",views.add_offer,name="add-offer"),
+    path("show-offer",views.show_offer,name="show-offer"),
+    path("update-offer/<int:pk>",views.update_offer,name="update-offer"),
+    path("delete-offer/<int:pk>",views.delete_offer,name="delete-offer"),
 ]

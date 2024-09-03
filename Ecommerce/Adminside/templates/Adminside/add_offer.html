@@ -1,0 +1,57 @@
+
+{% extends "AdminSide/index.html" %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Banner</h4>                
+                    <form class="forms-sample" method="post" action="{% url 'add-banner' %}" enctype="multipart/form-data">
+                    
+
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Offer Image</label>
+                            <input type="file" class="form-control" name="offerimage" id="exampleInputUsername1" placeholder="Offer Image" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Offer description</label>
+                            <input type="file" class="form-control" name="offerdiscription" id="exampleInputUsername1" placeholder="Offer description" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Offer Title</label>
+                            <input type="file" class="form-control" name="offertitle" id="exampleInputUsername1" placeholder="Offer Title" required="">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-8 col-form-label">Select offer yes or no</label>
+                              <div class="col-sm-5">
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="True" checked="" required="">
+                                    YES
+                                  <i class="input-helper"></i></label>
+                                </div>
+                              </div>
+                              <div class="col-sm-5">
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="False" required="">
+                                    NO
+                                  <i class="input-helper"></i></label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</div>
+</div>

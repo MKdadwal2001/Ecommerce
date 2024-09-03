@@ -226,5 +226,22 @@ def delete_banner(request,pk):
     selected_banner.delete()
     return redirect(show_banner)
 
+def add_offer(request):
+    if request.method=="POST":
+        
+        offer_image = request.FILES["bannerimage"]
+        isYesOrNo = request.POST["membershipRadios"]
+
+        o = AddOffers()
+        o.offer_image = offer_image
+        o.is_show = isYesOrNo
+        print("is_Yes_Or_No:-",isYesOrNo)
+        o.save()
+
+        return redirect(show_banner)
+    else:
+        return render(request,"Adminside/add_banner.html",)
+
+
 
 
