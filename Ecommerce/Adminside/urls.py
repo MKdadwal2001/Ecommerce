@@ -18,4 +18,10 @@ urlpatterns = [
     path("update-product/<int:pk>",views.update_product,name="update-product"),
     path("customer-queries",views.customer_queries,name="customer-queries"),
     path("admin-reply-customer-queries/<int:pk>",views.admin_reply_customer_queries,name="admin-reply-customer-queries"),
+
+    path("add-banner",views.add_banner,name="add-banner"),
+    path("show-banner",views.show_banner,name="show-banner"),
+    path("update-banner/<int:pk>",views.update_banner,name="update-banner"),
+    path("delete-banner/<int:pk>",views.delete_banner,name="delete-banner"),
+
 ]

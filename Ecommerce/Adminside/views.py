@@ -180,3 +180,51 @@ def admin_reply_customer_queries(request,pk):
         return redirect(customer_queries)
     else:
         return render(request,"Adminside/admin_reply_customer_queries.html",{"selected_query":selected_query})    
+
+def add_banner(request):
+    if request.method=="POST":
+        
+        banner_image = request.FILES["bannerimage"]
+        isYesOrNo = request.POST["membershipRadios"]
+
+        b = AddBanner()
+        b.banner_image = banner_image
+        b.is_show = isYesOrNo
+        print("is_Yes_Or_No:-",isYesOrNo)
+        b.save()
+
+        return redirect(show_banner)
+    else:
+        return render(request,"Adminside/add_banner.html",)
+
+def show_banner(request):
+    banner_data = AddBanner.objects.all()
+    print("banner data:-", len(banner_data))
+    return render(request,"Adminside/show_banner.html",{"banner_data":banner_data})        
+
+def update_banner(request, pk):
+    selected_banner = AddBanner.objects.get(id=pk)
+    if request.method == "POST":
+     
+        if 'bannerimage' in request.FILES:
+            banner_image = request.FILES["bannerimage"]
+            isYesOrNo = request.POST["membershipRadios"]
+
+            selected_banner.banner_image = banner_image
+            selected_banner.is_show = isYesOrNo
+            print("is_Yes_Or_No:-",isYesOrNo)
+
+            selected_banner.save()
+        
+        return redirect(show_banner)
+    else:
+        return render(request, "Adminside/update_banner.html", {"selected_banner": selected_banner})
+    
+
+def delete_banner(request,pk):
+    selected_banner = AddBanner.objects.get(id=pk)
+    selected_banner.delete()
+    return redirect(show_banner)
+
+
+

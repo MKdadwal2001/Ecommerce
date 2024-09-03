@@ -88,12 +88,25 @@
                   </div>
                </li>
                <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                  <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                  <i class="ti-palette menu-icon"></i>
+                  <span class="menu-title">Banner</span>
+                  <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="ui-basic2">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'add-banner' %}">Add Banner</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'show-banner' %}">Show Banner</a></li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
                 <i class="ti-palette menu-icon"></i>
                 <span class="menu-title">Contact Us</span>
                 <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic2">
+                <div class="collapse" id="ui-basic3">
                    <ul class="nav flex-column sub-menu">
                       <li class="nav-item"> <a class="nav-link" href="{% url 'customer-queries' %}">Customer Queries</a></li>
                    </ul>

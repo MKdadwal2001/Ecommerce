@@ -45,3 +45,8 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return self.username
+
+class AddBanner(models.Model):
+    banner_image = models.ImageField(upload_to="banner", default="")
+    is_show = models.BooleanField(default="False")
+    
