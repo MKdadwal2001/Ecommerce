@@ -6,8 +6,8 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add Banner</h4>                
-                    <form class="forms-sample" method="post" action="{% url 'add-banner' %}" enctype="multipart/form-data">
+                    <h4 class="card-title">Add Offer</h4>                
+                    <form class="forms-sample" method="post" action="{% url 'add-offer' %}" enctype="multipart/form-data">
                     
 
                         {% csrf_token %}
@@ -17,11 +17,11 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Offer description</label>
-                            <input type="file" class="form-control" name="offerdiscription" id="exampleInputUsername1" placeholder="Offer description" required="">
+                            <input type="text" class="form-control" name="offerdescription" id="exampleInputUsername1" placeholder="Offer description" required="">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Offer Title</label>
-                            <input type="file" class="form-control" name="offertitle" id="exampleInputUsername1" placeholder="Offer Title" required="">
+                            <input type="text" class="form-control" name="offertitle" id="exampleInputUsername1" placeholder="Offer Title" required="">
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">

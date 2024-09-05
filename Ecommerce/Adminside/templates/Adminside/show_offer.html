@@ -5,38 +5,42 @@
       <div class="col-lg-12 grid-margin stretch-card">
          <div class="card">
             <div class="card-body">
-               <h4 class="card-title">Banner Details</h4>
+               <h4 class="card-title">Offer Details</h4>
                <div class="table-responsive">
                   <table class="table">
                      <thead>
                         <tr>
                             <th>S.No.</th>
-                           <th>Banner Image</th>
+                           <th>Offer Image</th>
+                           <th>Offer Description</th>
+                           <th>Offer Title</th>
                            <th>Is showing on Customer Panel</th>
                            <th>Delete</th>
                            <th>Update</th>
                         </tr>
                      </thead>
                      <tbody>
-                        {% for i in banner_data %}
+                        {% for i in offer_data %}
                         <tr>
                             <td>{{forloop.counter}}</td>
-                           <td><img src="{{i.banner_image.url}}" alt="{{i.banner_image}}" width="100px" height="100px"></td>   
-                            {% if i.is_show == True %}
+                           <td><img src="{{i.offer_image.url}}" alt="{{i.offer_image}}" width="100px" height="100px"></td>   
+                           <td>{{i.offer_description}}</td>
+                           <td>{{i.offer_title}}</td> 
+                           {% if i.is_showing == True %}
                             <td>Yes</td>
                             {% else %}
                             <td>No</td>
                             {% endif %}
-                           <td>
-                              <a href="{% url 'delete-banner' i.id %}">
-                              <button type="button" clbass="btn btn-danger">Delete</button>
+                            <td>
+                              <a href="{% url 'delete-offer' i.id %}">
+                                <button type="button" class="btn btn-danger">Delete</button>
                               </a>
-                           </td>
-                           <td>
-                              <a href="{% url 'update-banner' i.id %}">
-                              <button type="button" class="btn btn-info">Update</button>
+                            </td>
+                            <td>
+                              <a href="{% url 'update-offer' i.id %}">
+                                <button type="button" class="btn btn-info">Update</button>
                               </a>
-                           </td>
+                            </td>
                         </tr>
                         {% endfor %}
                      </tbody>

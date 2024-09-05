@@ -229,19 +229,55 @@ def delete_banner(request,pk):
 def add_offer(request):
     if request.method=="POST":
         
-        offer_image = request.FILES["bannerimage"]
+        offer_image = request.FILES["offerimage"]
+        offer_description = request.POST["offerdescription"]
+        offer_title = request.POST["offertitle"]
         isYesOrNo = request.POST["membershipRadios"]
 
         o = AddOffers()
         o.offer_image = offer_image
-        o.is_show = isYesOrNo
+        o.offer_description = offer_description
+        o.offer_title = offer_title
+        o.is_showing = isYesOrNo
         print("is_Yes_Or_No:-",isYesOrNo)
         o.save()
 
-        return redirect(show_banner)
+        return redirect(show_offer)
     else:
-        return render(request,"Adminside/add_banner.html",)
+        return render(request,"Adminside/add_offer.html",)
+
+def show_offer(request):
+    offer_data = AddOffers.objects.all()
+    print("offer data:-", len(offer_data))
+    return render(request,"Adminside/show_offer.html",{"offer_data":offer_data})        
 
 
+def update_offer(request, pk):
+    selected_offer = AddOffers.objects.get(id=pk)
+    if request.method == "POST":
+     
+        if 'offerimage' in request.FILES:
+            
+            offer_image = request.FILES["offerimage"]
+            offer_description = request.POST["offerdescription"]
+            offer_title = request.POST["offertitle"]
+            isYesOrNo = request.POST["membershipRadios"]
 
+            selected_offer.offer_image = offer_image
+            selected_offer.offer_description = offer_description
+            selected_offer.offer_title = offer_title
+            selected_offer.is_showing = isYesOrNo
+            print("is_Yes_Or_No:-",isYesOrNo)
+
+            selected_offer.save()
+        
+        return redirect(show_offer)
+    else:
+        return render(request, "Adminside/update_offer.html", {"selected_offer": selected_offer})
+
+
+def delete_offer(request,pk):
+    selected_offer = AddOffers.objects.get(id=pk)
+    selected_offer.delete()
+    return redirect(show_offer)
 

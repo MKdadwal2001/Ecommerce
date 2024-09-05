@@ -45,7 +45,8 @@ def user_register(request):
         
         return redirect(user_login)
     else:
-        return render(request,"Userside/user_register.html")
+        banner_data = AddBanner.objects.filter(is_show=True)
+        return render(request,"Userside/user_register.html",{"banner_data":banner_data})
 
 def user_login(request):
     banner_data = AddBanner.objects.filter(is_show=True)
@@ -66,21 +67,23 @@ def user_login(request):
         return render(request,"Userside/user_login.html",{"banner_data":banner_data})
 
 
-def index(request):
+def user_index(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     trendy_products = Product.objects.filter(is_teends_or_just_arived=True)
     just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/index.html",{"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products,"total_favourite_products":total_favourite_products,"banner_data":banner_data})
+    return render(request,"Userside/user_index.html",{"offer_data":offer_data,"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products,"total_favourite_products":total_favourite_products,"banner_data":banner_data})
   
 def user_dashboard(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     trendy_products = Product.objects.filter(is_teends_or_just_arived=True)
     just_arrive_products = Product.objects.filter(is_teends_or_just_arived=False)
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/dashboard.html",{"banner_data":banner_data,"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products,"total_favourite_products":total_favourite_products})  
+    return render(request,"Userside/user_dashboard.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"trendy_products":trendy_products,"just_arrive_products":just_arrive_products,"total_favourite_products":total_favourite_products})  
 
 def user_logout(request):
     logout(request)
@@ -88,35 +91,39 @@ def user_logout(request):
     return redirect(user_dashboard)
 
 def category_based_products(request,pk):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     filtered_products_according_category = Product.objects.filter(category_id = Category.objects.get(id=pk))
     print("Filtered products according to the category :- ", filtered_products_according_category)
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/category_based_products.html",{"banner_data":banner_data,"categories_data":categories_data,"filtered_products_according_category":filtered_products_according_category,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/category_based_products.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"filtered_products_according_category":filtered_products_according_category,"total_favourite_products":total_favourite_products})
 
 def view_all_products(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     all_products = Product.objects.all()
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/view_all_products.html",{"banner_data":banner_data,"categories_data":categories_data,"all_products":all_products,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/view_all_products.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"all_products":all_products,"total_favourite_products":total_favourite_products})
 
 def all_categories(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     all_categories = Category.objects.all()
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/all_categories.html",{"banner_data":banner_data,"categories_data":categories_data,"all_categories":all_categories,
+    return render(request,"Userside/all_categories.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"all_categories":all_categories,
     "total_favourite_products":total_favourite_products})
 
 def product_details(request,pk):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     product_details = Product.objects.get(id=pk)
     print("Product Details :- ", product_details)
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/product_details.html",{"banner_data":banner_data,"categories_data":categories_data,"product_details":product_details,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/product_details.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"product_details":product_details,"total_favourite_products":total_favourite_products})
 
 def add_to_favourite(request,pk):  
     selected_product = Product.objects.get(id=pk)
@@ -127,11 +134,12 @@ def add_to_favourite(request,pk):
 
 
 def all_favourite_products(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:15]
     filtered_all_favourite_products = FavouriteProducts.objects.all()
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/all_favourite_products.html",{"banner_data":banner_data,"categories_data":categories_data,"filtered_all_favourite_products":filtered_all_favourite_products,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/all_favourite_products.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"filtered_all_favourite_products":filtered_all_favourite_products,"total_favourite_products":total_favourite_products})
 
 def remove_from_favourite(request,pk):
     selected_product =  FavouriteProducts.objects.get(id=pk)
@@ -160,17 +168,19 @@ def contact_us(request):
         messages.success(request, "Your Query is Submitted successfully.")
         categories_data = Category.objects.all()[:10]
         total_favourite_products = FavouriteProducts.objects.all().count()
-        return render(request, 'Userside/contact_us.html',{"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+        return render(request, 'Userside/contact_us.html',{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
     else:
+        offer_data = AddOffers.objects.filter(is_showing=True)
         banner_data = AddBanner.objects.filter(is_show=True)
         categories_data = Category.objects.all()[:10]
         total_favourite_products = FavouriteProducts.objects.all().count()
-        return render(request, "Userside/contact_us.html",{"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+        return render(request, "Userside/contact_us.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
 
 def about_us(request):
+    offer_data = AddOffers.objects.filter(is_showing=True)
     banner_data = AddBanner.objects.filter(is_show=True)
     categories_data = Category.objects.all()[:10]
     total_favourite_products = FavouriteProducts.objects.all().count()
-    return render(request,"Userside/about_us.html",{"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
+    return render(request,"Userside/about_us.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
 
 

@@ -1,4 +1,4 @@
-{% extends "Userside/index.html" %}
+{% extends "Userside/user_index.html" %}
 {% block content %}
 {% load static %}
 <div class="container-fluid pt-5">
@@ -18,18 +18,19 @@
 </div>
 <div class="container-fluid offer pt-5">
    <div class="row px-xl-5">
-      <div class="col-md-6 pb-4">
-         <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-            <img src="{% static 'Userside/img/offer-4.png' %}" alt="">
-            <div class="position-relative" style="z-index: 1;">
-               <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
-               <h1 class="mb-4 font-weight-semi-bold"> Collection</h1>
-               <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
-            </div>
-         </div>
-      </div>
+      {% for offer in offer_data %}
+       <div class="col-md-6 pb-4">
+           <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+               <img src="{{ offer.offer_image.url }}" alt="">
+               <div class="position-relative" style="z-index: 1;">
+                   <h5 class="text-uppercase text-primary mb-3">{{offer.offer_description}}</h5>
+                   <h1 class="mb-4 font-weight-semi-bold">{{ offer.offer_title }}</h1>
+                   <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+               </div>
+           </div>
+       </div>
+      {% endfor %}
    </div>
-</div>
 </div>
 <div class="container-fluid pt-5">
    <div class="text-center mb-4">
