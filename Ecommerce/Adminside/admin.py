@@ -8,3 +8,5 @@ admin.site.register(UserProfile)
 admin.site.register(ContactUs)
 admin.site.register(AddBanner)
 admin.site.register(AddOffers)
+
+

@@ -28,4 +28,10 @@ urlpatterns = [
     path("show-offer",views.show_offer,name="show-offer"),
     path("update-offer/<int:pk>",views.update_offer,name="update-offer"),
     path("delete-offer/<int:pk>",views.delete_offer,name="delete-offer"),
+
+    path("admin-profile/<int:pk>", views.admin_profile, name="admin-profile"),
+    path("show-profile",views.show_profile,name="show-profile"),
+    path("update-profile/<int:pk>", views.update_profile, name="update-profile"),
+
+
 ]

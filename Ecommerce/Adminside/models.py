@@ -55,3 +55,4 @@ class AddOffers(models.Model):
     offer_description = models.CharField(max_length=225)
     offer_title = models.CharField(max_length=225)
     is_showing = models.BooleanField(default="False")
+

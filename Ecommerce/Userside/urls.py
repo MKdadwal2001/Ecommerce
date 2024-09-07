@@ -15,6 +15,8 @@ urlpatterns = [
     path("add-to-favourite/<int:pk>",views.add_to_favourite,name="add-to-favourite"),
     path("all-favourite-products",views.all_favourite_products,name="all-favourite-products"),
     path("remove-from-favourite/<int:pk>",views.remove_from_favourite,name="remove-from-favourite"),
+    
     path("contact-us",views.contact_us,name="contact-us"),
     path("about-us",views.about_us,name="about-us"),
+     
 ]

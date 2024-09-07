@@ -12,59 +12,65 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="username" placeholder="Your Username">
+                            <input type="text" class="form-control custom-border" name="username" placeholder="Your Username">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="col-md-6 control-group">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 control-group">
-                            <input type="password" class="form-control" name="passwd" placeholder="Your Password">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="firstname" placeholder="Your First Name">
+                            <input type="email" class="form-control custom-border" name="email" placeholder="Your Email">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="lastname" placeholder="Your Last Name">
+                            <input type="password" id="passwordField" class="form-control custom-border" name="passwd" placeholder="Your Password">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="phonenumber" placeholder="Your Phone Number">
+                            <input type="text" class="form-control custom-border" name="firstname" placeholder="Your First Name">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 control-group">
+                            <input type="checkbox" id="togglePassword">
+                            <label for="togglePassword">Show Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 control-group">
+                            <input type="text" class="form-control custom-border" name="lastname" placeholder="Your Last Name">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-md-6 control-group">
+                            <input type="text" class="form-control custom-border" name="phonenumber" placeholder="Your Phone Number">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="pincode" placeholder="Your Pincode">
+                            <input type="text" class="form-control custom-border" name="pincode" placeholder="Your Pincode">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="locality" placeholder="Your Locality">
+                            <input type="text" class="form-control custom-border" name="locality" placeholder="Your Locality">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 control-group">
-                            <input type="text" class="form-control" name="landmark" placeholder="Your Landmark">
+                            <input type="text" class="form-control custom-border" name="landmark" placeholder="Your Landmark">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="col-md-6 control-group">
                             <p>Profile Picture only</p>
-                            <label for="" ><input type="file" class="form-control" name="userimage" placeholder="User Image">
+                            <label for=""><input type="file" class="form-control custom-border" name="userimage" placeholder="User Image">
                         <p class="help-block text-danger"></p>
                             </label>
                         </div>
                     </div>
                     <div class="row">
                          <div class="col-md-12 control-group">
-                             <input type="text" class="form-control" name="address" placeholder="Your Address">
+                             <input type="text" class="form-control custom-border" name="address" placeholder="Your Address">
                              <p class="help-block text-danger"></p>
                          </div>
                     </div>
@@ -82,4 +88,26 @@
     </div> 
 </div>
 </div>
+
+<style>
+    .custom-border {
+        border: 2px solid #D19C97;
+    }
+    
+    .custom-border:focus {
+        border-color: #D19C97;
+        box-shadow: 0 0 5px rgba(209, 156, 151, 0.5);
+    }
+</style>
+
+<script>
+    document.getElementById("togglePassword").addEventListener("change", function() {
+        var passwordField = document.getElementById("passwordField");
+        if (this.checked) {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    });
+</script>
 {% endblock %}

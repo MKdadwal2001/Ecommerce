@@ -9,27 +9,27 @@
          <div class="contact-form">
             <div id="success"></div>
             {% if messages %}
-            <ul class="messages">
-               {% for message in messages %}
-               <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-               {% endfor %}
-            </ul>
+            {% for message in messages %}
+            <div class="col-lg-12 mb-3" id="success"  style="color:white; background-color: #4CAF50; height: 40px; width: 800px; border-radius: 2px;">
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="position: absolute; top: 20%;">{{ message }}</p>
+            </div>
+            {% endfor %}
             {% endif %}
             <form action="{% url 'user-login' %}" method="post">
                {% csrf_token %}
                <div class="control-group">
-                  <input type="text" class="form-control" name="username" placeholder="Your Username">
+                  <input type="text" class="form-control custom-border" name="username" placeholder="Your Username">
                   <p class="help-block text-danger"></p>
                </div>
                <div class="control-group">
-                  <input type="password" id="passwordField" class="form-control" name="password" placeholder="Your Password">
+                  <input type="password" id="passwordField" class="form-control custom-border" name="password" placeholder="Your Password">
                   <p class="help-block text-danger"></p>
                </div>
                <div class="form-group form-check">
                   <input type="checkbox" class="form-check-input" id="togglePassword">
                   <label class="form-check-label" for="togglePassword">Show Password</label>
                </div>
-               <div>
+               <div class="text-center"> <!-- Centering the login button -->
                   <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Login</button>
                </div>
                <p class="help-block text-danger">Don't have an account? 
@@ -40,6 +40,16 @@
       </div>
    </div>
 </div>
+
+<style>
+    .custom-border {
+        border: 2px solid #D19C97;
+    }
+    .custom-border:focus {
+        border-color:#D19C97;
+        box-shadow: 0 0 5px #D19C97;
+    }
+</style>
 
 <script>
 document.getElementById("togglePassword").addEventListener("change", function() {

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.models import User
 
 
 
@@ -281,3 +282,56 @@ def delete_offer(request,pk):
     selected_offer.delete()
     return redirect(show_offer)
 
+def admin_profile(request,pk):
+    logged_in_user_data = User.objects.get(id=pk)
+    logged_in_user_profile = UserProfile.objects.get(userId=request.user.id)
+    print("Logged in user profile:- ", logged_in_user_profile)
+    print("User id:- ", logged_in_user_profile.userId, "User image:- ", logged_in_user_profile.user_image,"Phone number:- ", logged_in_user_profile.phone_number, "Address:- ", logged_in_user_profile.address, "Pincode:- ", logged_in_user_profile.pincode, "Locality:- ", logged_in_user_profile.locality)
+    
+    if request.method == 'POST':
+        admin_name = request.POST["adminname"]
+        admin_email = request.POST["adminemail"]
+        admin_bio = request.POST["adminbio"]
+        admin_location = request.POST["adminlocation"]
+        admin_birth_date = request.POST["adminbirthdate"]
+        admin_profile_image = request.FILES["adminprofileimage"]
+    
+
+        p = Profile()
+        p.admin_name = admin_name
+        p.admin_email = admin_email
+        p.admin_bio = admin_bio
+        p.admin_location = admin_location
+        p.admin_birth_date = admin_birth_date
+        p.admin_profile_image = admin_profile_image
+        p.save()
+        
+        return redirect(user_profile)
+    else:
+        return render(request, "Adminside/admin_profile.html",{"user_profile":logged_in_user_profile,"logged_in_user_data":logged_in_user_data})
+
+def update_profile(request, pk):
+    selected_profile =UserProfile.objects.get(id=pk)
+    if request.method == "POST":
+     
+        if 'adminimage' in request.FILES:
+            
+            admin_name = request.POST["adminname"]
+            admin_email = request.POST["adminemail"]
+            admin_bio = request.POST["adminbio"]
+            admin_location = request.POST["adminlocation"]
+            admin_birth_date = request.POST["adminbirthdate"]
+            admin_profile_image = request.FILES["adminprofileimage"]
+
+            selected_profile.admin_name = admin_name
+            selected_profile.admin_email = admin_email
+            selected_profile.admin_bio = admin_bio
+            selected_profile.admin_location = admin_location
+            selected_profile.admin_birth_date = admin_birth_date
+            selected_profile.admin_profile_image = admin_profile_image
+
+            selected_profile.save()
+        
+        return redirect(admin_profile)
+    else:
+        return render(request, "Adminside/update_profile.html", {"selected_profile": selected_profile})

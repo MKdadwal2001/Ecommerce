@@ -1,0 +1,39 @@
+
+{% extends "AdminSide/index.html" %}
+{% block content %}
+
+<div class="card-body">
+  <h4 class="card-title">Admin Profile</h4>
+   <form class="{% url 'admin-profile' pk=user_profile.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Name</label>
+      <input type="text" class="form-control" name="adminname" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Email</label>
+      <input type="text" class="form-control" name="adminemail" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Bio</label>
+      <input type="text" class="form-control" name="adminbio" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Location</label>
+      <input type="text" class="form-control" name="adminlocation" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Birth Date</label>
+      <input type="text" class="form-control" name="adminbirthdate" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername1">Admin Profiel Image</label>
+      <input type="file" class="form-control" name="adminprofileimage" id="exampleInputUsername1" placeholder="Offer Description" required>
+    </div>
+    <td>
+        <button type="button" class="btn btn-info">Update</button>
+      </a>
+    </td>
+  </form>
+</div>
+{% endblock %}

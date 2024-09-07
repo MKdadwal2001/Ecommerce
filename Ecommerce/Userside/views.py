@@ -182,5 +182,3 @@ def about_us(request):
     categories_data = Category.objects.all()[:10]
     total_favourite_products = FavouriteProducts.objects.all().count()
     return render(request,"Userside/about_us.html",{"offer_data":offer_data,"banner_data":banner_data,"categories_data":categories_data,"total_favourite_products":total_favourite_products})
-
-
