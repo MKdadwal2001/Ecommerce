@@ -30,8 +30,5 @@ urlpatterns = [
     path("delete-offer/<int:pk>",views.delete_offer,name="delete-offer"),
 
     path("admin-profile/<int:pk>", views.admin_profile, name="admin-profile"),
-    path("show-profile",views.show_profile,name="show-profile"),
-    path("update-profile/<int:pk>", views.update_profile, name="update-profile"),
-
 
 ]

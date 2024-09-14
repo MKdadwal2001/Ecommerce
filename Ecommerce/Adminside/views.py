@@ -289,49 +289,35 @@ def admin_profile(request,pk):
     print("User id:- ", logged_in_user_profile.userId, "User image:- ", logged_in_user_profile.user_image,"Phone number:- ", logged_in_user_profile.phone_number, "Address:- ", logged_in_user_profile.address, "Pincode:- ", logged_in_user_profile.pincode, "Locality:- ", logged_in_user_profile.locality)
     
     if request.method == 'POST':
-        admin_name = request.POST["adminname"]
-        admin_email = request.POST["adminemail"]
-        admin_bio = request.POST["adminbio"]
-        admin_location = request.POST["adminlocation"]
-        admin_birth_date = request.POST["adminbirthdate"]
+        print("Inside the POST method")
+
         admin_profile_image = request.FILES["adminprofileimage"]
-    
-
-        p = Profile()
-        p.admin_name = admin_name
-        p.admin_email = admin_email
-        p.admin_bio = admin_bio
-        p.admin_location = admin_location
-        p.admin_birth_date = admin_birth_date
-        p.admin_profile_image = admin_profile_image
-        p.save()
+        firstName = request.POST["firstname"]
+        lastName = request.POST["lastname"]
+        adminEmail = request.POST["adminemail"]
+        phoneNumber = request.POST["phonenumber"]
+        adminAddress = request.POST["adminaddress"]
+        admin_locality = request.POST["locality"]
+        pincode = request.POST["pincode"]
         
-        return redirect(user_profile)
-    else:
-        return render(request, "Adminside/admin_profile.html",{"user_profile":logged_in_user_profile,"logged_in_user_data":logged_in_user_data})
+        print("First name:- ", firstName)
 
-def update_profile(request, pk):
-    selected_profile =UserProfile.objects.get(id=pk)
-    if request.method == "POST":
-     
-        if 'adminimage' in request.FILES:
-            
-            admin_name = request.POST["adminname"]
-            admin_email = request.POST["adminemail"]
-            admin_bio = request.POST["adminbio"]
-            admin_location = request.POST["adminlocation"]
-            admin_birth_date = request.POST["adminbirthdate"]
-            admin_profile_image = request.FILES["adminprofileimage"]
+        logged_in_user_data.first_name = firstName
+        logged_in_user_data.last_name = lastName
+        logged_in_user_data.email = adminEmail
+        logged_in_user_data.save()
 
-            selected_profile.admin_name = admin_name
-            selected_profile.admin_email = admin_email
-            selected_profile.admin_bio = admin_bio
-            selected_profile.admin_location = admin_location
-            selected_profile.admin_birth_date = admin_birth_date
-            selected_profile.admin_profile_image = admin_profile_image
-
-            selected_profile.save()
+        logged_in_user_profile.user_image = admin_profile_image
+        logged_in_user_profile.phone_number = phoneNumber
+        logged_in_user_profile.address = adminAddress
+        logged_in_user_profile.locality = admin_locality
+        logged_in_user_profile.pincode = pincode
+        logged_in_user_profile.save()
         
-        return redirect(admin_profile)
+        messages.success(request,"Admin profile updated successfully.")
+        return render(request, "Adminside/admin_profile.html",{
+            "user_profile":logged_in_user_profile,"logged_in_user_data":logged_in_user_data})
     else:
-        return render(request, "Adminside/update_profile.html", {"selected_profile": selected_profile})
+        print("Inside the Else functionality")
+        return render(request, "Adminside/admin_profile.html",{
+            "user_profile":logged_in_user_profile,"logged_in_user_data":logged_in_user_data})
