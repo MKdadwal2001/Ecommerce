@@ -8,5 +8,6 @@ admin.site.register(UserProfile)
 admin.site.register(ContactUs)
 admin.site.register(AddBanner)
 admin.site.register(AddOffers)
-
+admin.site.register(Orders)
+admin.site.register(Cart)
 

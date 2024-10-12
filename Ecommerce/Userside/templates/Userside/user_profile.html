@@ -1,68 +1,160 @@
-{% extends "Userside/user_index.html" %}
-{% block content %}
-<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-   <h1 class="font-weight-semi-bold text-uppercase mb-3">Contact Us</h1>
-   <div class="d-inline-flex">
-      <p class="m-0"><a href="{% url 'user-dashboard' %}">Home</a></p>
-      <p class="m-0 px-2">-</p>
-      <p class="m-0">Contact</p>
-   </div>
-</div>
-<div class="container-fluid pt-5">
-   <div class="text-center mb-4">
-      <h2 class="section-title px-5"><span class="px-2">Contact For Any Queries</span></h2>
-   </div>
-   <div class="row px-xl-5">
-      <div class="col-lg-7 mb-5">
-         <div class="contact-form">
-            {% if messages %}
-            {% for message in messages %}
-            <div class="col-lg-12 mb-3" id="success"  style="color:white; background-color: #4CAF50; height: 40px; width: 800px; border-radius: 2px;">
-                <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="position: absolute; top: 20%;">{{ message }}</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Updated font for a modern look */
+            background-color: #eef2f3; /* Light background for better contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333; /* Standard text color */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+            max-width: 500px; /* Consistent max width */
+            width: 90%; /* Responsive */
+            padding: 40px; /* Increased padding for better spacing */
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em; /* Larger font for the title */
+            margin-bottom: 20px; /* Spacing below title */
+            color: #3498db; /* Primary color for the heading */
+        }
+
+        .profile-pic {
+            border-radius: 50%;
+            width: 120px; /* Consistent size for profile image */
+            height: 120px;
+            object-fit: cover;
+            margin: 20px auto; /* Centering with margin */
+            border: 3px solid #3498db; /* Border around profile picture */
+        }
+
+        .form-group {
+            margin-bottom: 25px; /* More spacing between form fields */
+            text-align: left; /* Align labels and inputs to the left */
+        }
+
+        .form-group label {
+            font-size: 1.1em; /* Standard label size */
+            color: #666; /* Darker color for labels */
+            margin-bottom: 8px; /* Spacing below labels */
+            display: block; /* Ensure labels occupy full width */
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 12px; /* Increased padding for better usability */
+            border-radius: 5px; /* Rounded edges for inputs */
+            border: 1px solid #ccc; /* Light border */
+            font-size: 1em; /* Standard input font size */
+            box-sizing: border-box; /* Include padding in width */
+            transition: border 0.3s; /* Smooth transition for border */
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="file"]:focus {
+            border: 1px solid #3498db; /* Focused state border color */
+            outline: none; /* Remove default outline */
+        }
+
+        button {
+            background-color: #3498db; /* Button color */
+            color: white;
+            padding: 15px 20px; /* Larger button padding */
+            border: none;
+            border-radius: 5px; /* Rounded button edges */
+            font-size: 1.1em; /* Standard button font size */
+            cursor: pointer;
+            margin-top: 20px; /* Space above button */
+            transition: background-color 0.3s; /* Smooth transition for hover */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker button color on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%; /* Maintain responsiveness */
+            }
+
+            h2 {
+                font-size: 1.8em; /* Slightly smaller on mobile */
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="file"] {
+                padding: 10px; /* Smaller padding on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+        <form class="{% url 'user-profile' pk=logged_in_user_data.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputUsername1">Profile Image</label>
+              <br>
+              <br>
+              <img src="{{user_profile.user_image.url}}" alt="Profile Image" width="100px" height="100px">
             </div>
-            {% endfor %}
-            {% endif %}
-            <form action="{% url 'contact-us' %}" method="POST">
-               {% csrf_token %}
-               <div class="control-group">
-                  <input type="text" class="form-control" name ="username" placeholder="Your Name">
-                  <p class="help-block text-danger"></p>
-               </div>
-               <div class="control-group">
-                  <input type="email" class="form-control" name ="email" placeholder="Your Email">
-                  <p class="help-block text-danger"></p>
-               </div>
-               <div class="control-group">
-                  <input type="text" class="form-control" name ="subject" placeholder="Subject" >
-                  <p class="help-block text-danger"></p>
-               </div>
-               <div class="control-group">
-                  <textarea class="form-control" rows="6" name ="message" placeholder="Message" ></textarea>
-                  <p class="help-block text-danger"></p>
-               </div>
-               <div>
-                  <button class="btn btn-primary py-2 px-4" type="submit">Send
-                  Message</button>
-               </div>
-            </form>
-         </div>
-      </div>
-      <div class="col-lg-5 mb-5">
-         <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
-         <p>eCommerce applications or e-commerce apps are design patterns of functionality needed to list items for purchase, facilitate a transaction by accepting payment methods, and initiate fulfillment or delivery of those purchases.</p>
-         <div class="d-flex flex-column mb-3">
-            <h5 class="font-weight-semi-bold mb-3">Address 1</h5>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Ramgarhia Chowk, Hoshiarpur.</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>o7services@gmail.com</p>
-            <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 7340724356.</p>
-         </div>
-         <div class="d-flex flex-column">
-            <h5 class="font-weight-semi-bold mb-3">Address 2</h5>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Street no-12, Bhawani Nagar, Jalandhar</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 8872657897.</p>
-         </div>
-      </div>
-   </div>
-</div>
-{% endblock %}
+            <div class="form-group">
+              <label for="exampleInputUsername1">Select New Profile Image</label>
+              <input type="file" class="form-control" name="adminprofileimage" id="exampleInputUsername1" placeholder="Select New Profile Image">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">First Name</label>
+              <input type="text" class="form-control" name="firstname" id="exampleInputUsername1" placeholder="First Name" value="{{logged_in_user_data.first_name}}" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Last Name</label>
+              <input type="text" class="form-control" name="lastname" id="exampleInputUsername1" placeholder="Last Name" value="{{logged_in_user_data.last_name}}" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">User Email</label>
+              <input type="text" class="form-control" name="adminemail" id="exampleInputUsername1" placeholder="User Email" required value="{{logged_in_user_data.email}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Phone Number</label>
+              <input type="text" class="form-control" name="phonenumber" id="exampleInputUsername1" placeholder="Phone Number" required value="{{user_profile.phone_number}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">User Address</label>
+              <input type="text" class="form-control" name="adminaddress" id="exampleInputUsername1" placeholder="User Address" required value="{{user_profile.address}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Locality</label>
+              <input type="text" class="form-control" name="locality" id="exampleInputUsername1" placeholder="Locality" required value="{{user_profile.locality}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1">Pincode</label>
+              <input type="text" class="form-control" name="pincode" id="exampleInputUsername1" placeholder="Pincode" required value="{{user_profile.pincode}}">
+            </div>
+          </form>
+        <button onclick="editProfile()">Edit Profile</button>
+    </div>
+
+    <script>
+        function editProfile() {
+            alert('Edit Profile functionality coming soon!');
+        }
+    </script>
+</body>
+</html>

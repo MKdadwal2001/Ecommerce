@@ -56,3 +56,24 @@ class AddOffers(models.Model):
     offer_title = models.CharField(max_length=225)
     is_showing = models.BooleanField(default="False")
 
+ 
+class Cart(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE, default="")
+    product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=255)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def price_by_quantity(self):
+        return int(self.product_id.product_price) * int(self.quantity)
+
+class Orders(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE, default="")
+    cart_id = models.ForeignKey(Cart,on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=255)
+    transaction_id = models.CharField(max_length=255)
+    total_payment = models.CharField(max_length=255)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "User:- {a} Product:- {b}".format(a=self.user_id,b=self.product_id)
+

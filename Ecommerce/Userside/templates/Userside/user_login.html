@@ -29,13 +29,14 @@
                   <input type="checkbox" class="form-check-input" id="togglePassword">
                   <label class="form-check-label" for="togglePassword">Show Password</label>
                </div>
-               <div class="text-center"> <!-- Centering the login button -->
+               <div class="text-center"> 
                   <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Login</button>
                </div>
-               <p class="help-block text-danger">Don't have an account? 
+               <p class="help-block text-danger text-center">Don't have an account? 
                   <a class="text-dark font-weight-semi-bold" href="{% url 'user-register' %}">Register Here</a>
                </p>
             </form>
+            
          </div>
       </div>
    </div>
@@ -52,13 +53,20 @@
 </style>
 
 <script>
-document.getElementById("togglePassword").addEventListener("change", function() {
-   var passwordField = document.getElementById("passwordField");
-   if (this.checked) {
-      passwordField.type = "text";
-   } else {
-      passwordField.type = "password";
-   }
-});
-</script>
+   document.getElementById("sendMessageButton").addEventListener("click", function(event) {
+       var username = document.querySelector('input[name="username"]').value.trim();
+       var password = document.querySelector('input[name="password"]').value.trim();
+   
+       if (!username || !password) {
+           event.preventDefault();
+           alert("Please first fill in all the details that are given on the page.");
+       }
+   });
+   
+   document.getElementById("togglePassword").addEventListener("change", function() {
+       var passwordField = document.getElementById("passwordField");
+       passwordField.type = this.checked ? "text" : "password";
+   });
+   </script>
+   
 {% endblock %}

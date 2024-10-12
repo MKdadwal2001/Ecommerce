@@ -30,5 +30,9 @@ urlpatterns = [
     path("delete-offer/<int:pk>",views.delete_offer,name="delete-offer"),
 
     path("admin-profile/<int:pk>", views.admin_profile, name="admin-profile"),
+    
+    path('product-description/', views.product_description, name='product-description'),
 
+    path("customers-orders",views.customers_orders,name="customers-orders"),
+    path("payment-details",views.payment_details,name="payment-details"),
 ]

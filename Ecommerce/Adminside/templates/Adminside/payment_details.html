@@ -1,0 +1,46 @@
+{% extends "AdminSide/index.html" %}
+{% block content %}
+<div class="content-wrapper">
+   <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">Payments Details</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                            <th>S.No.</th>
+                           <th>Order Id</th>
+                           <th>Transaction Id</th>
+                           <th>Product Name</th>
+                           <th>Customer Name</th>
+                           <th>Total Payment</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% if payment_details %}
+                        {% for i in payment_details %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                           <td>{{i.order_id}}</td>   
+                           <td>{{i.transaction_id}}</td>
+                           <td>{{i.cart_id.product_id.product_name}}</td> 
+                           <td>{{i.user_id.username}}</td> 
+                           <td>{{i.total_payment}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                           <td colspan="6" style="text-align: center;">No payments yet.</td>
+                           </tr>
+                           {% endif %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

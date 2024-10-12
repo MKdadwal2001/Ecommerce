@@ -69,10 +69,10 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col-md-12 control-group">
-                             <input type="text" class="form-control custom-border" name="address" placeholder="Your Address">
-                             <p class="help-block text-danger"></p>
-                         </div>
+                        <div class="col-md-12 control-group">
+                            <textarea class="form-control custom-border" name="address" placeholder="Your Address" rows="4"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
                     </div>
                     <div class="text-center mt-4">
                         <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Register</button>
@@ -101,6 +101,24 @@
 </style>
 
 <script>
+    document.getElementById("sendMessageButton").addEventListener("click", function(event) {
+        var username = document.querySelector('input[name="username"]').value;
+        var email = document.querySelector('input[name="email"]').value;
+        var password = document.querySelector('input[name="passwd"]').value;
+        var firstname = document.querySelector('input[name="firstname"]').value;
+        var lastname = document.querySelector('input[name="lastname"]').value;
+        var phonenumber = document.querySelector('input[name="phonenumber"]').value;
+        var pincode = document.querySelector('input[name="pincode"]').value;
+        var locality = document.querySelector('input[name="locality"]').value;
+        var landmark = document.querySelector('input[name="landmark"]').value;
+        var address = document.querySelector('textarea[name="address"]').value;
+
+        if (!username || !email || !password || !firstname || !lastname || !phonenumber || !pincode || !locality || !landmark || !address) {
+            event.preventDefault(); 
+            alert("Please fill in all the required fields.");
+        }
+    });
+    
     document.getElementById("togglePassword").addEventListener("change", function() {
         var passwordField = document.getElementById("passwordField");
         if (this.checked) {
@@ -110,4 +128,5 @@
         }
     });
 </script>
+
 {% endblock %}

@@ -7,20 +7,16 @@
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
       <meta content="Free HTML Templates" name="keywords">
       <meta content="Free HTML Templates" name="description">
-      <!-- Favicon -->
+   
       <link href="{% static 'Userside/img/favicon.ico' %}" rel="icon">
-      <!-- Google Web Fonts -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-      <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-      <!-- Libraries Stylesheet -->
       <link href="{% static 'Userside/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-      <!-- Customized Bootstrap Stylesheet -->
       <link href="{% static 'Userside/css/style.css' %}" rel="stylesheet">
    </head>
    <body>
-      <!-- Topbar Start -->
+      
       <div class="container-fluid">
          <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
@@ -34,19 +30,19 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                <div class="d-inline-flex align-items-center">
-                  <a class="text-dark px-2" href="">
+                  <a class="text-dark px-2" href="https://www.facebook.com/">
                   <i class="fab fa-facebook-f"></i>
                   </a>
-                  <a class="text-dark px-2" href="">
+                  <a class="text-dark px-2" href="https://en.wikipedia.org/wiki/Twitter">
                   <i class="fab fa-twitter"></i>
                   </a>
-                  <a class="text-dark px-2" href="">
+                  <a class="text-dark px-2" href="https://www.linkedin.com/jobs/view/4023374356/">
                   <i class="fab fa-linkedin-in"></i>
                   </a>
-                  <a class="text-dark px-2" href="">
-                  <i class="fab fa-instagram"></i>
+                  <a class="text-dark px-2" href="https://web.whatsapp.com/">
+                  <i class="fab fa-whatsapp"></i>
                   </a>
-                  <a class="text-dark pl-2" href="">
+                  <a class="text-dark pl-2" href="https://www.youtube.com/">
                   <i class="fab fa-youtube"></i>
                   </a>
                </div>
@@ -70,20 +66,32 @@
                   </div>
                </form>
             </div>
+            {% if request.user.is_authenticated %}
             <div class="col-lg-3 col-6 text-right">
                <a href="{% url 'all-favourite-products' %}" class="btn border">
                <i class="fas fa-heart text-primary"></i>
                <span class="badge">{{total_favourite_products}}</span>
                </a>
-               <a href="" class="btn border">
+               <a href="{% url 'show-cart' %}" class="btn border">
+               <i class="fas fa-shopping-cart text-primary"></i>
+               <span class="badge">{{total_cart_items}}</span>
+               </a>
+            </div>
+            {% else %}
+            <div class="col-lg-3 col-6 text-right">
+               <a href="#" class="btn border">
+               <i class="fas fa-heart text-primary"></i>
+               <span class="badge">0</span>
+               </a>
+               <a href="#" class="btn border">
                <i class="fas fa-shopping-cart text-primary"></i>
                <span class="badge">0</span>
                </a>
             </div>
+            {% endif %}
          </div>
       </div>
-      <!-- Topbar End -->
-      <!-- Navbar Start -->
+      
       <div class="container-fluid mb-5">
          <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -118,15 +126,16 @@
                         <div class="nav-item dropdown">
                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
                            <div class="dropdown-menu rounded-0 m-0">
-                              <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                              <a href="checkout.html" class="dropdown-item">Orders</a>
+                              <a href="{% url 'show-cart' %}" class="dropdown-item">Shopping Cart</a>
+                              <a href="{% url 'order-details' %}" class="dropdown-item">Orders</a>
+                              <a href="{% url 'orders-payments-details' %}" class="dropdown-item">Payment Details</a>
                            </div>
                         </div>
                         <a href="{% url 'contact-us' %}" class="nav-item nav-link">Contact Us</a>
                         <a href="{% url 'about-us' %}" class="nav-item nav-link">About Us</a>
                      </div>
                      <div class="navbar-nav ml-auto py-0">
-                        <a href="#" class="nav-item nav-link">Welcome {{request.user}}</a>
+                        <a href="{% url 'user-profile' user.id %}" class="nav-item nav-link">Welcome {{request.user}}</a>
                         <a href="{% url 'user-logout' %}" class="nav-item nav-link">Logout</a>
                      </div>
                      {% else %}
@@ -153,7 +162,6 @@
                               <div class="p-3" style="max-width: 700px;">
                                   <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ AddBanner.banner_image }}</h4>
                                   <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{ AddBanner.is_show}}</h3>
-                                  <a href="{{ banner.link }}" class="btn btn-light py-2 px-3">Shop Now</a>
                               </div>
                           </div>
                       </div>
@@ -173,8 +181,7 @@
             </div>
          </div>
       </div>
-      <!-- Navbar End -->
-      <!-- Featured Start -->
+   
       <div class="container-fluid pt-5">
          <div class="row px-xl-5 pb-3">
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -203,20 +210,8 @@
             </div>
          </div>
       </div>
-      <!-- Featured End -->
-      <!-- Categories Start -->
-      <!-- Categories End -->
-      <!-- Offer Start -->
       {% block content %}
       {% endblock %}
-      <!-- Offer End -->
-      <!-- Products Start -->
-      <!-- Products End -->
-      <!-- Subscribe Start -->
-      <!-- Subscribe End -->
-      <!-- Products Start -->
-      <!-- Products End -->
-      <!-- Vendor Start -->
       <div class="container-fluid py-5">
          <div class="row px-xl-5">
             <div class="col">
@@ -249,8 +244,7 @@
             </div>
          </div>
       </div>
-      <!-- Vendor End -->
-      <!-- Footer Start -->
+
       <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
          <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
@@ -269,8 +263,8 @@
                      <div class="d-flex flex-column justify-content-start">
                         {% if request.user.is_authenticated %}
                         <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Products</a>
-                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Categories</a>
+                        <a class="text-dark mb-2" href="{% url 'all-products' %}"><i class="fa fa-angle-right mr-2"></i>Products</a>
+                        <a class="text-dark mb-2" href="{% url 'all-categories' %}"><i class="fa fa-angle-right mr-2"></i>Categories</a>
                         <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                         <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Orders</a>
                         <a class="text-dark mb-2" href="{% url 'contact-us' %}"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
@@ -278,8 +272,8 @@
                         <a class="text-dark" href="{% url 'user-logout' %}"><i class="fa fa-angle-right mr-2"></i>Logout</a>
                         {% else %}
                         <a class="text-dark mb-2" href="{% url 'user-dashboard' %}"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Products</a>
-                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Categories</a>
+                        <a class="text-dark mb-2" href="{% url 'all-products' %}"><i class="fa fa-angle-right mr-2"></i>Products</a>
+                        <a class="text-dark mb-2" href="{% url 'all-categories' %}"><i class="fa fa-angle-right mr-2"></i>Categories</a>
                         <a class="text-dark mb-2" href="{% url 'contact-us' %}"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         <a class="text-dark mb-2" href="{% url 'about-us' %}"><i class="fa fa-angle-right mr-2"></i>About Us</a>
                         <a class="text-dark mb-2" href="{% url 'user-login' %}"><i class="fa fa-angle-right mr-2"></i>Login</a>
@@ -295,7 +289,7 @@
                <p class="mb-md-0 text-center text-md-left text-dark">
                   <a class="text-dark font-weight-semi-bold" href="#">E-Commerce</a>
                   <a class="text-dark font-weight-semi-bold" href="#">User Panel</a><br>
-                  Developed By <a href="https://o7services.com" target="_blank">Mohit Kumar </a>
+                  Developed By <a href="https://www.o7services.com" target="_blank">Mohit Kumar </a>
                </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
@@ -303,18 +297,14 @@
             </div>
          </div>
       </div>
-      <!-- Footer End -->
-      <!-- Back to Top -->
+     
       <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-      <!-- JavaScript Libraries -->
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
       <script src="{% static 'Userside/lib/easing/easing.min.js' }"></script>
       <script src="{% static 'Userside/lib/owlcarousel/owl.carousel.min.js' %}"></script>
-      <!-- Contact Javascript File -->
       <script src="{% static 'Userside/mail/jqBootstrapValidation.min.js' %}"></script>
       <script src="{% static 'Userside/mail/contact.js' %}"></script>
-      <!-- Template Javascript -->
       <script src="{% static 'Userside/js/main.js' %}"></script>
    </body>
 </html>

@@ -8,6 +8,7 @@
       <p class="m-0">Contact</p>
    </div>
 </div>
+
 <div class="container-fluid pt-5">
    <div class="text-center mb-4">
       <h2 class="section-title px-5"><span class="px-2">Contact For Any Queries</span></h2>
@@ -17,36 +18,49 @@
          <div class="contact-form">
             {% if messages %}
             {% for message in messages %}
-            <div class="col-lg-12 mb-3" id="success"  style="color:white; background-color: #4CAF50; height: 40px; width: 800px; border-radius: 2px;">
-                <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="position: absolute; top: 20%;">{{ message }}</p>
+            <div class="col-lg-12 mb-3" id="success" style="color:white; background-color: #4CAF50; height: 40px; width: 800px; border-radius: 2px;">
+               <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="position: absolute; top: 20%;">{{ message }}</p>
             </div>
             {% endfor %}
             {% endif %}
-            <form action="{% url 'contact-us' %}" method="POST">
+
+            <style>
+               .form-control {
+                  border: 2px solid #D19C97 !important;
+                  border-radius: 5px;
+               }
+
+               .form-control:focus {
+                  border-color: #D19C97 !important;
+                  box-shadow: none;
+               }
+            </style>
+
+            <form action="{% url 'contact-us' %}" method="POST" onsubmit="return validateForm()">
                {% csrf_token %}
                <div class="control-group">
-                  <input type="text" class="form-control" name ="username" placeholder="Your Name">
-                  <p class="help-block text-danger"></p>
+                  <input type="text" class="form-control" name="username" placeholder="Your Name">
+                  <p class="help-block text-danger" id="username-error"></p>
                </div>
                <div class="control-group">
-                  <input type="email" class="form-control" name ="email" placeholder="Your Email">
-                  <p class="help-block text-danger"></p>
+                  <input type="email" class="form-control" name="email" placeholder="Your Email">
+                  <p class="help-block text-danger" id="email-error"></p>
                </div>
                <div class="control-group">
-                  <input type="text" class="form-control" name ="subject" placeholder="Subject" >
-                  <p class="help-block text-danger"></p>
+                  <input type="text" class="form-control" name="subject" placeholder="Subject">
+                  <p class="help-block text-danger" id="subject-error"></p>
                </div>
                <div class="control-group">
-                  <textarea class="form-control" rows="6" name ="message" placeholder="Message" ></textarea>
-                  <p class="help-block text-danger"></p>
+                  <textarea class="form-control" rows="6" name="message" placeholder="Message"></textarea>
+                  <p class="help-block text-danger" id="message-error"></p>
                </div>
                <div>
-                  <button class="btn btn-primary py-2 px-4" type="submit">Send
-                  Message</button>
+                  <button class="btn btn-primary py-2 px-4" type="submit">Send Message</button>
                </div>
             </form>
          </div>
       </div>
+
       <div class="col-lg-5 mb-5">
          <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
          <p>eCommerce applications or e-commerce apps are design patterns of functionality needed to list items for purchase, facilitate a transaction by accepting payment methods, and initiate fulfillment or delivery of those purchases.</p>
@@ -65,4 +79,46 @@
       </div>
    </div>
 </div>
+
+<script>
+   function validateForm() {
+      let valid = true;
+
+      document.getElementById("username-error").innerText = "";
+      document.getElementById("email-error").innerText = "";
+      document.getElementById("subject-error").innerText = "";
+      document.getElementById("message-error").innerText = "";
+
+      const username = document.querySelector('input[name="username"]').value.trim();
+      const email = document.querySelector('input[name="email"]').value.trim();
+      const subject = document.querySelector('input[name="subject"]').value.trim();
+      const message = document.querySelector('textarea[name="message"]').value.trim();
+
+      if (username === "") {
+         document.getElementById("username-error").innerText = "Please enter your name.";
+         valid = false;
+      }
+
+      if (email === "") {
+         document.getElementById("email-error").innerText = "Please enter your email.";
+         valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+         document.getElementById("email-error").innerText = "Please enter a valid email address.";
+         valid = false;
+      }
+
+      if (subject === "") {
+         document.getElementById("subject-error").innerText = "Please enter a subject.";
+         valid = false;
+      }
+
+      if (message === "") {
+         document.getElementById("message-error").innerText = "Please enter your message.";
+         valid = false;
+      }
+
+      return valid;
+   }
+</script>
+
 {% endblock %}

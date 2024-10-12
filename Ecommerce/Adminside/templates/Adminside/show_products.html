@@ -26,28 +26,26 @@
                   <td>{{ forloop.counter }}</td>
                   <td>{{ i.category_id.category_name }}</td>
                   
-                  <!-- Product Name -->
                   <td>
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                      <!-- Truncated Product Name -->
-                      <span class="truncated product-name">{{ i.product_name|truncatechars:20 }}</span>
-                      <!-- Full Product Name, initially hidden -->
-                      <span class="full-description product-name" style="display:none;">{{ i.product_name }}</span>
+                      <span class="truncated">{{ i.product_name|truncatechars:20 }}</span>
                       {% if i.product_name|length > 20 %}
-                      <button type="button" class="btn btn-link toggle-content-btn" data-product="product-name-{{ forloop.counter }}">View Product Name</button>
+                      <button type="button" class="btn btn-link" 
+                              onclick="openProductnamePage('{{ i.product_name }}')">
+                              View Product Name
+                      </button>
                       {% endif %}
                     </div>
                   </td>
                   
-                  <!-- Product Description -->
                   <td>
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                      <!-- Truncated Product Description -->
-                      <span class="truncated product-description">{{ i.product_description|truncatechars:20 }}</span>
-                      <!-- Full Product Description, initially hidden -->
-                      <span class="full-description product-description" style="display:none;">{{ i.product_description }}</span>
+                      <span class="truncated">{{ i.product_description|truncatechars:20 }}</span>
                       {% if i.product_description|length > 20 %}
-                      <button type="button" class="btn btn-link toggle-content-btn" data-product="product-description-{{ forloop.counter }}">View Description</button>
+                      <button type="button" class="btn btn-link" 
+                              onclick="openDescriptionPage('{{ i.product_description }}')">
+                              View Description
+                      </button>
                       {% endif %}
                     </div>
                   </td>
@@ -75,31 +73,11 @@
   </div>
 </div>
 
-<!-- JavaScript to handle toggling of full content -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var buttons = document.querySelectorAll('.toggle-content-btn');
-    
-    buttons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        // Get the product type (name or description) to toggle
-        var truncatedContent = button.previousElementSibling.previousElementSibling; // The truncated content
-        var fullContent = button.previousElementSibling; // The full description content
-        
-        if (fullContent.style.display === "none") {
-          // Show the full content
-          truncatedContent.style.display = "none";
-          fullContent.style.display = "block";
-          button.textContent = 'Close'; // Change button text to 'Close'
-        } else {
-          // Hide the full content and show the truncated version
-          truncatedContent.style.display = "block";
-          fullContent.style.display = "none";
-          button.textContent = 'View'; // Change button text back to 'View'
-        }
-      });
-    });
-  });
+  function openDescriptionPage(description) {
+    const url = "{% url 'product-description' %}?description=" + encodeURIComponent(description);
+    window.open(url, "_blank", "width=600,height=400");
+  }
+  
 </script>
-
 {% endblock %}

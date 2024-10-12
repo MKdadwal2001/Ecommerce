@@ -1,0 +1,49 @@
+{% extends "Userside/user_index.html" %}
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+   <h1 class="font-weight-semi-bold text-uppercase mb-3">Payment Details</h1>
+   <div class="d-inline-flex">
+      <p class="m-0"><a href="{% url 'user-dashboard' %}">Home</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Payment Details</p>
+   </div>
+</div>
+
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+       <h2 class="section-title px-5"><span class="px-2">Your Orders Payment Details</span></h2>
+    </div>
+
+    <div class="row px-xl-5">
+        <div class="col-lg-12 mb-5">
+        <table style="font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+            <tr>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">S.No.</th>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Order Id</th>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Transaction Id</th>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product Name</th>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Customer Name</th>
+              <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Total Payment</th>
+            </tr>
+            {% if payment_details %}
+            {% for i in payment_details %}
+            <tr>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{forloop.counter}}</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{i.order_id}}</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{i.transaction_id}}</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{i.cart_id.product_id.product_name}}</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{i.user_id.username}}</td>
+              <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{{i.total_payment}}</td>
+            </tr>
+            {% endfor %}
+            {% else %}  
+            <tr>
+                <td colspan="6" style="border: 1px solid #dddddd; text-align: left; padding: 8px; text-align: center;">No payment details yet.</td>
+                </tr>
+                {% endif %}
+          </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

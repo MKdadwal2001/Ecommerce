@@ -321,3 +321,14 @@ def admin_profile(request,pk):
         print("Inside the Else functionality")
         return render(request, "Adminside/admin_profile.html",{
             "user_profile":logged_in_user_profile,"logged_in_user_data":logged_in_user_data})
+
+def product_description(request):
+    return render(request, 'AdminSide/product_description.html')
+
+def customers_orders(request):
+    orders_details = Orders.objects.all()
+    return render(request,"AdminSide/customers_orders.html",{"orders_details":orders_details})
+
+def payment_details(request):
+    payment_details = Orders.objects.all()
+    return render(request,"AdminSide/payment_details.html",{"payment_details":payment_details})
